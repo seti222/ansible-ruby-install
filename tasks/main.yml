@@ -13,6 +13,7 @@
   - libreadline6-dev
   - libtinfo-dev
   - libyaml-dev
+  when: ansible_os_family == 'Ubuntu'
 
   #
   # Install ruby-install
