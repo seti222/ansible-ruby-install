@@ -40,6 +40,7 @@
   register: ruby_install_untarred
 
 - name: Run ruby-install install target
+  sudo: yes
   command: make install
            "chdir=/tmp/ruby-install-{{ ruby_install_version }}"
   when: ruby_install_untarred | changed
