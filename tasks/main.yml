@@ -19,29 +19,28 @@
   # Install ruby-install
   #
 - name: Check for ruby-install runtime
-  stat: path="/usr/local/bin/ruby-install"
+  stat: path=/usr/local/bin/ruby-install
   register: ruby_install_runtime
 
 - name: Check for ruby-install tarball
-  stat: path="/tmp/ruby-install-{{ ruby_install_version }}.tar.gz"
+  stat: path=/tmp/ruby-install-{{ ruby_install_version }}.tar.gz
   when: not ruby_install_runtime.stat.exists
   register: ruby_install_tarball
 
 - name: Download ruby-install
-  get_url: url="http://github.com/postmodern/ruby-install/archive/v{{ ruby_install_version }}.tar.gz"
-           dest="/tmp/ruby-install-{{ ruby_install_version }}.tar.gz"
+  get_url: url=http://github.com/postmodern/ruby-install/archive/v{{ ruby_install_version }}.tar.gz
+           dest=/tmp/ruby-install-{{ ruby_install_version }}.tar.gz
   when: not ruby_install_runtime.stat.exists and not ruby_install_tarball.stat.exists
   register: ruby_install_downloaded
 
 - name: Untar ruby-install
-  command: tar xf "/tmp/ruby-install-{{ ruby_install_version }}.tar.gz"
-           chdir="/tmp"
+  command: tar xf /tmp/ruby-install-{{ ruby_install_version }}.tar.gz
+           chdir=/tmp
   when: ruby_install_downloaded | changed
   register: ruby_install_untarred
 
 - name: Run ruby-install install target
   sudo: yes
   command: make install
-           "chdir=/tmp/ruby-install-{{ ruby_install_version }}"
+           chdir=/tmp/ruby-install-{{ ruby_install_version }}
   when: ruby_install_untarred | changed
-
