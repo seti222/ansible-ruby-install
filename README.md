@@ -8,7 +8,7 @@ Tested on ansible 1.6, might work (or not) on earlier versions.
 
 ## Role variables
 
-<tt>ruby_install_version</tt>: the version of ruby-install to install (defaults to 0.4.3)
+<tt>ruby_install_version</tt>: the version of ruby-install to install (defaults to 0.5.0)
 
 ## Dependencies
 
